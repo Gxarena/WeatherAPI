@@ -1,50 +1,44 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Axios from 'axios';
+import { BsSearch } from 'react-icons/bs'
+import ClearSky from '../assets/clearsky.jpg';
+import Cloudy from '../assets/cloudy.jpg';
+import Rainy from '../assets/rainy.jpg';
+import Snowy from '../assets/snowy.jpg';
+import Storm from '../assets/storm.jpg';
+import DefaultIMG from '../assets/defaultIMG.jpg';
+import WeatherDetails from './WeatherDetails';
 
-const Home = () => {
+const Home = ({setUnits, units, city, setCity}) => {
 
-    const [location, setLocation] = useState("");
-
-    const [temp, setTemp] = useState("");
-    const [tempHigh, setTempHigh] = useState("");
-    const [tempLow, setTempLow] = useState("");
-    const [humidity, setHumidity] = useState("");
-    const [weather, setWeather] = useState("");
-    const [windSpeed, setWindSpeed] = useState("");
-
-    const fetchCityData = (event) => {
-        if(event.key === 'Enter'){
-            Axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=6ddfb5dcea4cdfd2ec3dd89e4ba3550b`)
-            .then((res) =>{
-                console.log(res);
-
-                const long = res.data[0].lon;
-                const lat = res.data[0].lat;
-
-                // Once the first API request is fulfilled to get the long and lat of the city, 
-                // the next API request with the long and lat will fulfill, granting us the city weather data
-                Axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=6ddfb5dcea4cdfd2ec3dd89e4ba3550b`)
-                .then((res) => {
-                    console.log(res)
-
-
-
-                }).catch((err) => {
-                    console.log(err)
-                })
-
-            }).catch((err) => {
-                console.log(err)
-            });
-        }
-    }
-
+  const handleTempUnit = (e) => {
+    const selectedUnit = e.currentTarget.name;
+    console.log(selectedUnit)
+    //if(units !== selectedUnit) setUnits(selectedUnit);
+  }
+  const enterKeyPressed = (e) => {
+    if(e.keyCode === 13)
+      setCity(e.currentTarget.value);
+    
+  }
+    // FIGURE OUT HOW TO CHANGE IMAGE BASED ON backroundIMG
   return (
     <div>
         {/*  */}
-        <div className=''>
-        <input onKeyPress={fetchCityData} onChange={(event) => {setLocation(event.target.value);}} className="bg-gray-300/50 border border-gray-300 text-gray-900 text-sm rounded-lg w-50 p-2.5 placeholder-gray-500" placeholder="Enter City" required />
-        
+        <div className='flex flex-row justify-center my-6'>
+          <div className='flex flex-row w-3/4 items-center justify-center space-x-4'>
+            <input 
+              value={null}
+              onKeyDown={enterKeyPressed}
+              className="bg-gray-300/50 border border-gray text-gray-900 text-sm rounded-lg w-full p-2.5 placeholder-black" 
+              placeholder="Enter City" required 
+              />
+          </div>
+          <div className='flex flex-row w-1/4 items-center justify-center'>
+            <button onClick={(e) => handleTempUnit(e)} name='metric' className='text-xl text-white font-light'>°C</button> 
+            <p className='text-xl text-white mx-2'>|</p>
+            <button onClick={(e) => handleTempUnit(e)} name='imperial' className='text-xl text-white font-light'>°F</button> 
+          </div>           
         </div>
         
     </div>
