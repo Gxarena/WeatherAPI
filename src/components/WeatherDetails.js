@@ -3,13 +3,14 @@ import { CiTempHigh} from 'react-icons/ci'
 import {  WiRaindrop } from 'react-icons/wi'
 import { BsWind, BsSunrise, BsSunset } from 'react-icons/bs'
 import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa'
-import windSpeed from './Home'
+import Cloudy from '../assets/cloudy.jpg'
+
 
 function WeatherDetails({weather: {humidity, details, temp, feels_like, speed, iconURL, 
                                     sunup, sundown, temp_max, temp_min}, units}) {
   return (
     <div>
-        <div className='flex items-center justify-center py-6 text-xl text-cyan-300'>
+        <div className='flex items-center justify-center py-10 text-xl text-cyan-300'>
             <p>{details}</p>
         </div>
         <div className='flex flex-row items-center justify-between text-white py-3'>

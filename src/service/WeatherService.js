@@ -6,7 +6,7 @@ export const formatTime = (dt) => new Date(dt * 1000);
 export const formatSunset = (sunset) => new Date(sunset * 1000);
 export const formatSunrise = (sunrise) => new Date(sunrise * 1000);
 
-const getWeatherData = async (city, units ='metric') => {
+const getWeatherData = async (city, units) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=${units}`
     
     const data = await fetch(url)
@@ -27,7 +27,7 @@ const getWeatherData = async (city, units ='metric') => {
     const {main: details, icon} = weather[0]
     
     return {lat, lon, temp ,feels_like, temp_min, temp_max, humidity, name, time: formatTime(dt), timezone, speed,
-            country, sunup: formatSunrise(sunrise), sundown: formatSunset(sunset), weather, details, iconURL: makeiconURL(icon)}
+            country, sunup: formatSunrise(sunrise), sundown: formatSunset(sunset), weather, details, iconURL: makeiconURL(icon), icon}
 };
 
 export default getWeatherData;
