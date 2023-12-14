@@ -3,7 +3,6 @@ import Home from './components/Home'
 import TimeAndLocation from './components/TimeAndLocation'
 import WeatherDetails from './components/WeatherDetails';
 import getWeatherData from './service/WeatherService';
-import defaultIMG from './assets/defaultIMG.jpg';
 
 function App() {
 
