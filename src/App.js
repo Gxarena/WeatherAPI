@@ -29,9 +29,8 @@ function App() {
   }
 
   return (
-      <div className={`h-screen w-screen mt-4 py-5 px-32 shadowl-xl bg-gradient-to-br ${changeBG()} shadow-gray-400`}>
+      <div className={`h-screen w-screen py-5 px-32 shadowl-xl bg-gradient-to-br ${changeBG()} shadow-gray-400`}>
         <Home weather={weather} units={units} setUnits={setUnits} city={city} setCity={setCity}/>  
-
         {weather && (
           <div>
             <TimeAndLocation weather={weather} />
